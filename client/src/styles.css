@@ -1,0 +1,12 @@
+.NavBar a, .NavBar button {
+	margin: 0 5px;
+	cursor: pointer;
+}
+
+.NavBar {
+	margin-bottom: 20px
+}
+
+img {
+	width: 400px;
+}
