@@ -2,6 +2,9 @@ const User = require('../models/User.js')
 const Vehicle = require('../models/Vehicle.js')
 const signToken = require('../serverAuth.js').signToken
 
+const axios = require('axios')
+const httpClient = axios.create()
+
 module.exports = {
 
 	index: (req, res) => {
@@ -51,5 +54,41 @@ module.exports = {
 			const token = signToken(user)
 			res.json({success: true, message: "Token attached.", token})
 		})
+	},
+
+	showLocation: (req, res) => {
+		const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${req.user.city}, ${req.user.zipCode}&key=${process.env.API_KEY}`
+		
+		// sample array of businesses from yelp (you may need to adjust for difference in data structure)
+		// const businesses = [
+		// 	{ name: "GA SM", address: "1520 2nd St, Santa Monica, CA" },
+		// 	{ name: "GA DTLA", address: "360 E 2nd St #400, Los Angeles, CA 90012" }
+		// ]
+
+		// // create an array of httpClient promises based on the address of each business
+		// const geolocationRequests = businesses.map((b) => {
+		// 	const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${b.address}&key=${process.env.API_KEY}`
+		// 	return httpClient({method: 'get', url: apiUrl})
+		// })
+
+		// // you get back an array of apiResponses (each with a .data) when all of these requests have come back.
+		// Promise.all(geolocationRequests).then(results => {
+		// 	const businessesWithCoordinates = businesses.map((b, index) => {
+		// 		return {
+		// 			...b,
+		// 			lat: results[index].data.results[0].geometry.location.lat,
+		// 			lng: results[index].data.results[0].geometry.location.lng,
+		// 		}
+		// 	})
+		// 	console.log(businessesWithCoordinates)
+		// 	// res.json()
+		// })
+
+
+		
+		httpClient({method: 'get', url: apiUrl}).then((apiResponse) =>{
+			res.json(apiResponse.data)
+		})
+		  
 	}
 }

@@ -12,9 +12,14 @@ usersRouter.post('/authenticate', usersCtrl.authenticate)
 
 
 usersRouter.use(verifyToken)
+
+usersRouter.route('/my-location')
+	.get(usersCtrl.showLocation)
+
 usersRouter.route('/:id')
 	.get(usersCtrl.show)
 	.patch(usersCtrl.update)
 	.delete(usersCtrl.destroy)
+
 
 module.exports = usersRouter

@@ -87,6 +87,10 @@ httpClient.deleteMaintenance = function(id, mntncId){
 	return this({method: 'delete', url:`/api/vehicles/${id}/maintenance/${mntncId}`})
 }
 
+httpClient.getLocation = function () {
+	return this({method: 'get', url: '/api/users/my-location'})
+}
+
 
 httpClient.defaults.headers.common.token = httpClient.getToken()
 export default httpClient
