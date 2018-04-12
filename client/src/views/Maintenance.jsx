@@ -25,6 +25,8 @@ class MaintenanceList extends React.Component{
 		<div className='Maintenance'>
 			{vehicles.map((v) => {
 				return (
+					<div key={v._id}>
+					<h2>{v.make} - {v.model}</h2>
 					<table>
 						<thead>
 							<tr>
@@ -34,19 +36,20 @@ class MaintenanceList extends React.Component{
 							</tr>
 						</thead>
 					{v.maintenance.map((m) => {
+						const dueDate = new Date (m.dueDate)
 						return (
-						<tbody>
+						<tbody key={m._id}>
 							<tr>
 								<td>{m.title}</td>
-								<td>{m.dueDate}</td>
+								<td>{dueDate.toLocaleDateString()}</td>
 								<td>{m.dueAt}</td>
 							</tr>
 						</tbody>
 						)
 					})}
-					
-					<Link to={`/vehicles/maintenance/${v._id}/new`}>Add Maintenance</Link>
 				  </table>
+				  <Link to={`/vehicles/maintenance/${v._id}/new`}>Add Maintenance</Link>
+				  </div>
 				)
 			})}
 		</div>

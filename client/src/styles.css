@@ -8,5 +8,17 @@
 }
 
 img {
-	width: 400px;
+	max-width: 400px;
+}
+
+.homeh1{
+	text-align: center;
+}
+
+.homeh2 {
+	text-align: center;
+}
+
+.image-circle {
+	border-radius: 50px;
 }

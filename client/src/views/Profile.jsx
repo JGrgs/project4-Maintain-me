@@ -40,7 +40,7 @@ class Profile extends React.Component{
 	const { vehicles } = this.state
 	return (
 		<div className='Profile'>
-			<h1>Welcome to your Profile!</h1>
+			<h1>{this.props.currentUser.name}'s Profile!</h1>
 			<button onClick={this.handleDeleteUser.bind(this)}>Delete Profile</button>
 			<Link to="/vehicles/new">Add Car</Link>
 			{vehicles.map((v) => {
