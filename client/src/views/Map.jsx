@@ -13,7 +13,10 @@ const style =  {
 export class MapContainer extends React.Component {
 
     state = {
+        showingInfoWindow: false,
+        activeMarker: {},
         location: null,
+        geoCodeLocation: null,
         businesses: {
             name: [],
             coordinates: {
@@ -25,8 +28,10 @@ export class MapContainer extends React.Component {
 
     componentDidMount() {
         httpClient.getLocation().then((serverResponse) => {
+            console.log(serverResponse)
             this.setState({
-                location: serverResponse.data.results[0].geometry.location
+                location: serverResponse.data.results[0].formatted_address,
+                geoCodeLocation: serverResponse.data.results[0].geometry.location
             })
         })
 
@@ -45,35 +50,89 @@ export class MapContainer extends React.Component {
             })
         })
     }
+
+    onMyMarkerClick(props, marker, e){
+        this.setState({
+            selectedPlace: props,
+            activeMarker: marker,
+            showingInfoWindow: true 
+        })
+    }
+
+    onMarkerClick(props, marker, e){
+        this.setState({
+            selectedPlace: props,
+            activeMarker: marker,
+            showingInfoWindow: true 
+        })
+    }
+
+    onMapClicked = (props) => {
+        if (this.state.showingInfoWindow) {
+          this.setState({
+            showingInfoWindow: false,
+            activeMarker: null
+          })
+        }
+      };
     
   render() {
-      if(!this.state.location) return <h1>Loading...</h1>
+      if(!this.state.geoCodeLocation) return <h1>Loading...</h1>
     return (
       <Map  google={this.props.google}
+      onClick={this.onMapClicked}
       style={style}
       initialCenter={{
-        lat: this.state.location.lat,
-        lng: this.state.location.lng
+        lat: this.state.geoCodeLocation.lat,
+        lng: this.state.geoCodeLocation.lng
       }}
-      zoom={15}
+      zoom={14}
       onClick={this.onMapClicked}>
         { this.state.businesses.name.map((b,i) => {
-            console.log(this.state.businesses.coordinates[i].latitude, this.state.businesses.coordinates[i].longitude)
             const lat = this.state.businesses.coordinates[i].latitude
             const lng = this.state.businesses.coordinates[i].longitude
             return (
+                
                 <Marker
                     key={i}
 
                     name={b}
+
+                    onClick={this.onMarkerClick.bind(this)}
                     
-                    position={{lat: this.state.businesses.coordinates[i].latitude,
-                    lng:this.state.businesses.coordinates[i].longitude}}
-                    />
-                
+                    position={{lat: lat,
+                    lng: lng}}
+                />
             )
+            
         })}
-        <Marker position={{lat: this.state.location.lat, lng: this.state.location.lng}} />
+           <InfoWindow
+                    marker={this.state.activeMarker}
+                    visible={this.state.showingInfoWindow}>
+                    {this.state.businesses.name.map((b, i) => {
+                        return ( <div>
+                        <h1>{b[i]}</h1>
+                        </div> )
+                    })}
+                      
+            </InfoWindow>
+            
+        <Marker 
+            onClick={this.onMyMarkerClick.bind(this)} 
+
+            name={"My Location"} 
+            
+            position={{lat: this.state.geoCodeLocation.lat, lng: this.state.geoCodeLocation.lng}} 
+        />
+
+
+        <InfoWindow
+            marker={this.state.activeMarker}
+            visible={this.state.showingInfoWindow}>
+                <div>
+                    <h1>{"My location"}</h1>
+                </div>
+        </InfoWindow>
     </Map>
     );
   }

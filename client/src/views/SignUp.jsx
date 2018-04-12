@@ -4,7 +4,7 @@ import httpClient from '../httpClient'
 // sign up form behaves almost identically to log in form. We could create a flexible Form component to use for both actions, but for now we'll separate the two:
 class SignUp extends React.Component {
 	state = {
-		fields: { name: '', email: '', password: '', city: '', zipCode: ''}
+		fields: { name: '', email: '', password: '', address: '', city: '', zipCode: ''}
 	}
 
 	onInputChange(evt) {
@@ -19,7 +19,7 @@ class SignUp extends React.Component {
 	onFormSubmit(evt) {
 		evt.preventDefault()
 		httpClient.signUp(this.state.fields).then(user => {
-			this.setState({ fields: { name: '', email: '', password: '', city: '', zipCode: '' } })
+			this.setState({ fields: { name: '', email: '', password: '', address: '', city: '', zipCode: '' } })
 			if(user) {
 				this.props.onSignUpSuccess(user)
 				this.props.history.push('/')
@@ -28,7 +28,7 @@ class SignUp extends React.Component {
 	}
 	
 	render() {
-		const { name, email, password, city, zipCode } = this.state.fields
+		const { name, email, password, address, city, zipCode } = this.state.fields
 		return (
 			<div className='SignUp'>
 				<div className='row'>
@@ -38,6 +38,7 @@ class SignUp extends React.Component {
 							<input type="text" placeholder="Name" name="name" value={name} />
 							<input type="text" placeholder="Email" name="email" value={email} />
 							<input type="password" placeholder="Password" name="password" value={password} />
+							<input type="text" placeholder="Address" name="address" value={address} />
 							<input type="text" placeholder="City" name="city" value={city} />
 							<input type="text" placeholder="ZipCode" name="zipCode" value={zipCode} />
 							<button>Sign Up</button>

@@ -33,6 +33,7 @@ class MaintenanceList extends React.Component{
 								<th>Maintenance</th>
 								<th>Due Date</th>
 								<th>Due At (Miles)</th>
+								<th>Note</th>
 							</tr>
 						</thead>
 					{v.maintenance.map((m) => {
@@ -40,13 +41,16 @@ class MaintenanceList extends React.Component{
 						return (
 						<tbody key={m._id}>
 							<tr>
-								<td>{m.title}</td>
+								<td><Link to={`/vehicles/${v._id}/maintenance/${m._id}`}>{m.title}</Link></td>
 								<td>{dueDate.toLocaleDateString()}</td>
 								<td>{m.dueAt}</td>
+								<td>{m.note}</td>
 							</tr>
 						</tbody>
+						
 						)
 					})}
+					
 				  </table>
 				  <Link to={`/vehicles/maintenance/${v._id}/new`}>Add Maintenance</Link>
 				  </div>

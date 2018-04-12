@@ -13,7 +13,7 @@ vehiclesRouter.post('/', vehiclesCtrl.create)
 vehiclesRouter.delete('/:id', vehiclesCtrl.destroy)
 vehiclesRouter.get('/:id/maintenance', vehiclesCtrl.showMaintenance)
 vehiclesRouter.post('/maintenance/:id', vehiclesCtrl.createMaintenance)
-vehiclesRouter.post('/:id/maintenance/:mntncId', vehiclesCtrl.updateMaintenance)
+vehiclesRouter.patch('/:id/maintenance/:mntncId', vehiclesCtrl.updateMaintenance)
 vehiclesRouter.delete('/:id/maintenance/:mntncId', vehiclesCtrl.destroyMaintenance)
 
 module.exports = vehiclesRouter

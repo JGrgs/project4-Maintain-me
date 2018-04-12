@@ -80,7 +80,7 @@ httpClient.addMaintenance = function(id, maintenanceInfo) {
 }
 
 httpClient.editMaintenance = function(id, mntncId, maintenanceInfo){
-	return this({method: 'post', url:`/api/vehicles/${id}/maintenance/${mntncId}`, data: maintenanceInfo})
+	return this({method: 'patch', url:`/api/vehicles/${id}/maintenance/${mntncId}`, data: maintenanceInfo})
 }
 
 httpClient.deleteMaintenance = function(id, mntncId){
