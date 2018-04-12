@@ -16,6 +16,9 @@ usersRouter.use(verifyToken)
 usersRouter.route('/my-location')
 	.get(usersCtrl.showLocation)
 
+usersRouter.route('/yelp-data')
+	.get(usersCtrl.getYelp)
+
 usersRouter.route('/:id')
 	.get(usersCtrl.show)
 	.patch(usersCtrl.update)

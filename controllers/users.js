@@ -4,6 +4,12 @@ const signToken = require('../serverAuth.js').signToken
 
 const axios = require('axios')
 const httpClient = axios.create()
+'use strict';
+const apiKey = "kFaB_z1hMIv1gWsKbcBtPREokaRfGfSV5Uj9etPRqbWaxkb3x9dGvSw2bx3giroUD8dVi-1V8mwJXy4HTBtKfyo0J03oJEP9XmOSP9t2N4rO79o7KBRbskk8OYvOWnYx"
+ 
+const yelp = require('yelp-fusion');
+ 
+const client = yelp.client(apiKey);
 
 module.exports = {
 
@@ -57,7 +63,7 @@ module.exports = {
 	},
 
 	showLocation: (req, res) => {
-		const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${req.user.city}, ${req.user.zipCode}&key=${process.env.API_KEY}`
+		const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${req.user.city},${req.user.zipCode}&key=${process.env.API_KEY}`
 		
 		// sample array of businesses from yelp (you may need to adjust for difference in data structure)
 		// const businesses = [
@@ -90,5 +96,16 @@ module.exports = {
 			res.json(apiResponse.data)
 		})
 		  
+	},
+
+	getYelp:(req, res) => {
+		client.search({
+			term:'mechanic',
+			location: `${req.user.city}`
+		  }).then(response => {
+			res.json(response.jsonBody.businesses);
+		  }).catch(e => {
+			res.json(e);
+		  });
 	}
 }

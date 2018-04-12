@@ -91,6 +91,10 @@ httpClient.getLocation = function () {
 	return this({method: 'get', url: '/api/users/my-location'})
 }
 
+httpClient.getBusinesses = function() {
+	return this({method: 'get', url: '/api/users/yelp-data'})
+}
+
 
 httpClient.defaults.headers.common.token = httpClient.getToken()
 export default httpClient

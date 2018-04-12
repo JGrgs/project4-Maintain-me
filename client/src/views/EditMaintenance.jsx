@@ -41,7 +41,7 @@ class EditMaintenance extends React.Component{
 
 
     render(){
-        const { vehicle, maintenance, title, note, dueDate, dueAt} = this.state
+        const { maintenance} = this.state
 
         return(
                         <div>
