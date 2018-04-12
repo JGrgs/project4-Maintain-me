@@ -25,23 +25,32 @@ class MaintenanceList extends React.Component{
 		<div className='Maintenance'>
 			{vehicles.map((v) => {
 				return (
-					<div className="MaintenanceList" key={v._id}>
-					<h2>Maintenance for {v.model}: </h2>
+					<table>
+						<thead>
+							<tr>
+								<th>Maintenance</th>
+								<th>Due Date</th>
+								<th>Due At (Miles)</th>
+							</tr>
+						</thead>
+					{v.maintenance.map((m) => {
+						return (
+						<tbody>
+							<tr>
+								<td>{m.title}</td>
+								<td>{m.dueDate}</td>
+								<td>{m.dueAt}</td>
+							</tr>
+						</tbody>
+						)
+					})}
 					
-						{v.maintenance.map((m) => {
-							return (
-								<ul key={m._id}>
-								<li><Link to={`/vehicles/${v._id}/maintenance/${m._id}`}>{m.title}</Link> - Due: {m.dueAt} - Note: {m.note}</li>
-								</ul>
-							)
-                        })}
-                        
-						<Link to={`/vehicles/maintenance/${v._id}/new`}>Add Maintenance</Link>
-					</div>
+					<Link to={`/vehicles/maintenance/${v._id}/new`}>Add Maintenance</Link>
+				  </table>
 				)
 			})}
-			
 		</div>
+		
 	)
 }
 }
