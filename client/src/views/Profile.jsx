@@ -10,6 +10,7 @@ class Profile extends React.Component{
 
 	componentDidMount(){
 		httpClient.getVehicle().then((serverResponse) => {
+			console.log(this.props)
 			this.setState({
 				vehicles: serverResponse.data.filter((v) => {
 					return this.props.currentUser._id === v.user
@@ -36,29 +37,33 @@ class Profile extends React.Component{
 		})
 	}
 
+	handleAddVehicle(){
+		this.props.history.push('/vehicles/new')
+	}
+
 	render() {
 	const { vehicles } = this.state
 	return (
 		<div className='Profile'>
-			<h1>{this.props.currentUser.name}'s Profile!</h1>
-			<button onClick={this.handleDeleteUser.bind(this)}>Delete Profile</button>
-			<Link to="/vehicles/new">Add Car</Link>
+			<h1>{this.props.currentUser.name}'s Vehicle(s)</h1>
+			<button onClick={this.handleAddVehicle.bind(this)}>Add Vehicle</button>
+			<button className="delete-profile" onClick={this.handleDeleteUser.bind(this)}>Delete Profile</button>
 			{vehicles.map((v) => {
 				return (
-					<div className="Car" key={v._id}>
-						<div className="CarInfo">
-							<h3>{v.year} - {v.make} {v.model}</h3>
+					<div className="row profile" key={v._id}>
+						<div className="column-25 profile">
+							<h3 className="h3-vehicle-name">{v.year} - {v.make} {v.model}</h3>
 							<img src={`${v.image}`} alt={`${v.model}`} />
 						{/* <h3>Mileage: {v.mileage}</h3> */}
 						</div>
-						<div className="MaintenanceDue">
-							<Link to={`/vehicles/${v._id}/maintenance`}>Maintenance Info</Link>
+						<div className="column-75 vehicle-text-column">
+							<Link className="maintenanceLink" to={`/vehicles/${v._id}/maintenance`}>Maintenance Info</Link>
+							<br/>
 							<button onClick={this.handleDelete.bind(this, v._id)}>Delete Vehicle</button>
 						</div>
 					</div>
 				)
 			})}
-			
 		</div>
 	)
 }

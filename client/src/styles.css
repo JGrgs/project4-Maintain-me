@@ -46,3 +46,45 @@ img {
 .row {
 	margin-bottom: 35px;
 }
+
+.maintenanceLink {
+	font-size: 20px;
+    font-weight: 400;
+    text-decoration: underline;
+}
+
+.vehicle-text-column {
+	padding-left: 3rem;
+    margin-top: 35px;
+}
+
+.h3-vehicle-name{
+	/* width: 350px; */
+	/* display: flex;
+	flex-wrap: wrap; */
+}
+.vehicle-text-column button {
+	margin-top: 30px;
+	display: flex;
+	align-content: flex-end;
+}
+
+.row .profile{
+	margin-top: 30px;
+}
+
+.delete-profile{
+	float: right;
+}
+
+.Profile{
+	color: black;
+}
+
+.Profile h1{
+	font-weight: 350;
+}
+
+.column-25.profile{
+	padding-right: 40px;
+}
