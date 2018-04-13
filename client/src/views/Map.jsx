@@ -1,10 +1,10 @@
 import React from 'react'
-import {Map, InfoWindow, Marker, GoogleApiWrapper, GoogleMapReact} from 'google-maps-react'
+import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react'
 import httpClient from '../httpClient.js'
 
 
 const apiKey = "AIzaSyB0eMTL9hnGmaifNZOTiuRNJxNCOpOhBoc"
-const style =  {
+var style =  {
     width: '1000px',
     height: '600px'
 }
@@ -89,7 +89,6 @@ export class MapContainer extends React.Component {
         lng: this.state.geoCodeLocation.lng
       }}
       zoom={14}
-    //   onClick={this.onMapClicked}>
     >
         { this.state.businesses.name.map((b,i) => {
             const lat = this.state.businesses.coordinates[i].latitude

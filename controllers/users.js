@@ -100,7 +100,7 @@ module.exports = {
 	getYelp:(req, res) => {
 		client.search({
 			term:'mechanic',
-			location: `${req.user.city}`
+			location: `${req.user.address}, ${req.user.city}, ${req.user.zipCode}`
 		  }).then(response => {
 			res.json(response.jsonBody.businesses);
 		  }).catch(e => {

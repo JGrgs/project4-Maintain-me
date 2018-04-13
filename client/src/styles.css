@@ -4,23 +4,32 @@
 }
 
 .NavBar {
-	margin-bottom: 20px
+	margin-bottom: 20px;
+	text-align: right;
+    font-size: 20px;
+	font-weight: 400;
+	margin-top: 20px;
 }
 
 img {
-	max-width: 400px;
+	max-width: 350px;
 }
 
 .homeh1{
 	text-align: center;
+	color: black;
+	font-weight: 500;
+    text-decoration: underline;
 }
 
 .homeh2 {
 	text-align: center;
+	color: black;
+	margin-bottom: 35px;
 }
 
 .image-circle {
-	border-radius: 50px;
+	border-radius: 70px;
 }
 
 .infowindow {
@@ -29,4 +38,11 @@ img {
 
 .Home .text-column {
 	padding: 3rem 5rem;
+	font-size: 20px;
+    font-weight: 400;
+    color: black;
+}
+
+.row {
+	margin-bottom: 35px;
 }
