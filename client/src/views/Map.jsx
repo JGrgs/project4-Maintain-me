@@ -52,6 +52,7 @@ export class MapContainer extends React.Component {
     }
 
     onMyMarkerClick(props, marker, e){
+        console.log(marker)
         this.setState({
             selectedPlace: props,
             activeMarker: marker,
@@ -60,6 +61,7 @@ export class MapContainer extends React.Component {
     }
 
     onMarkerClick(props, marker, e){
+        console.log(marker)
         this.setState({
             selectedPlace: props,
             activeMarker: marker,
@@ -67,14 +69,14 @@ export class MapContainer extends React.Component {
         })
     }
 
-    onMapClicked = (props) => {
-        if (this.state.showingInfoWindow) {
-          this.setState({
-            showingInfoWindow: false,
-            activeMarker: null
-          })
-        }
-      };
+    // onMapClicked = (props) => {
+    //     if (this.state.showingInfoWindow) {
+    //       this.setState({
+    //         showingInfoWindow: false,
+    //         activeMarker: null
+    //       })
+    //     }
+    //   };
     
   render() {
       if(!this.state.geoCodeLocation) return <h1>Loading...</h1>
@@ -87,7 +89,8 @@ export class MapContainer extends React.Component {
         lng: this.state.geoCodeLocation.lng
       }}
       zoom={14}
-      onClick={this.onMapClicked}>
+    //   onClick={this.onMapClicked}>
+    >
         { this.state.businesses.name.map((b,i) => {
             const lat = this.state.businesses.coordinates[i].latitude
             const lng = this.state.businesses.coordinates[i].longitude
@@ -100,38 +103,27 @@ export class MapContainer extends React.Component {
 
                     onClick={this.onMarkerClick.bind(this)}
                     
-                    position={{lat: lat,
-                    lng: lng}}
+                    position={{
+                        lat: lat,
+                        lng: lng
+                    }}
                 />
             )
             
         })}
-           <InfoWindow
-                    marker={this.state.activeMarker}
-                    visible={this.state.showingInfoWindow}>
-                    {this.state.businesses.name.map((b, i) => {
-                        return ( <div>
-                        <h1>{b[i]}</h1>
-                        </div> )
-                    })}
-                      
-            </InfoWindow>
-            
         <Marker 
-            onClick={this.onMyMarkerClick.bind(this)} 
-
-            name={"My Location"} 
-            
+            onClick={this.onMarkerClick.bind(this)} 
+            name={"My Location: " + this.state.location} 
             position={{lat: this.state.geoCodeLocation.lat, lng: this.state.geoCodeLocation.lng}} 
         />
 
-
         <InfoWindow
             marker={this.state.activeMarker}
-            visible={this.state.showingInfoWindow}>
-                <div>
-                    <h1>{"My location"}</h1>
-                </div>
+            visible={this.state.showingInfoWindow}
+        >
+            <div>
+                <h2>{this.state.activeMarker.name}</h2>
+            </div>           
         </InfoWindow>
     </Map>
     );
