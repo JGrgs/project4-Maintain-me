@@ -22,3 +22,11 @@ img {
 .image-circle {
 	border-radius: 50px;
 }
+
+.infowindow {
+	width: 200px;
+}
+
+.Home .text-column {
+	padding: 3rem 5rem;
+}
