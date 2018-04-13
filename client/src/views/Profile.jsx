@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import httpClient from '../httpClient.js'
+import carImg from '../images/615_main_l.jpg'
+import bikeImg from '../images/harley.jpg'
 
 class Profile extends React.Component{
 
@@ -53,7 +55,7 @@ class Profile extends React.Component{
 					<div className="row profile" key={v._id}>
 						<div className="column-25 profile">
 							<h3 className="h3-vehicle-name">{v.year} - {v.make} {v.model}</h3>
-							<img src={`${v.image}`} alt={`${v.model}`} />
+							<img src={carImg} alt={`${v.model}`} />
 						{/* <h3>Mileage: {v.mileage}</h3> */}
 						</div>
 						<div className="column-75 vehicle-text-column">
