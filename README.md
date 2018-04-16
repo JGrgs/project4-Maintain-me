@@ -40,7 +40,7 @@ Maintain-Me is an app that helps you log and track all your vehicle's maintenanc
 
 ### Approach
 
-Planning for this app included creating a basic wireframe for overall app layout (wireframe included in trello), an ERD diagram displaying the models, followed by the creation of user stories using Trello.
+Planning for this app included creating a basic wireframe for overall app layout (wireframe included in trello), an ERD diagram displaying the models, followed by the creation of user stories using [Trello](https://trello.com/b/bnD4O9WG/project-4).
 
 ### Unresolved Issues
 
